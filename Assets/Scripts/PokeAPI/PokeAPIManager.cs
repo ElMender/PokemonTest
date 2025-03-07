@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class PokeAPIManager : MonoBehaviour
 {
     [SerializeField] private TMP_InputField pokemonInput;
-    [SerializeField] private TMP_Text displayText;
-    [SerializeField] private Image pokemonSprite;
+    //[SerializeField] private TMP_Text displayText;
+    //[SerializeField] private Image pokemonSprite;
 
     private readonly string baseUrl = "https://pokeapi.co/api/v2/pokemon/";
 
@@ -34,7 +34,7 @@ public class PokeAPIManager : MonoBehaviour
             {
                 // Parse JSON data
                 PokemonData data = JsonUtility.FromJson<PokemonData>(request.downloadHandler.text);
-                displayText.text = $"Name: {data.name}\nID: {data.id}";
+                //displayText.text = $"Name: {data.name}\nID: {data.id}";
 
                 // Cargar Sprite del pokemon
                 StartCoroutine(LoadPokemonSprite(data.sprites.front_default));
@@ -56,11 +56,7 @@ public class PokeAPIManager : MonoBehaviour
             else
             {
                 Texture2D texture = DownloadHandlerTexture.GetContent(request);
-                pokemonSprite.sprite = Sprite.Create(
-                    texture,
-                    new Rect(0, 0, texture.width, texture.height),
-                    new Vector2(0.5f, 0.5f)
-                );
+                //pokemonSprite.sprite = Sprite.Create(texture,new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
             }
         }
     }

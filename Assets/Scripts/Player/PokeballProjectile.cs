@@ -6,6 +6,7 @@ public class PokeballProjectile : MonoBehaviour
     Rigidbody rb;
     public float force;
 
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -19,9 +20,9 @@ public class PokeballProjectile : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.name != "Pokemon")
+        if (collision.gameObject.tag == "Pokemon")
         {
             Destroy(this.gameObject);
         }
