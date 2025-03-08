@@ -6,7 +6,6 @@ public class PokeballProjectile : MonoBehaviour
     Rigidbody rb;
     public float force;
 
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -16,7 +15,7 @@ public class PokeballProjectile : MonoBehaviour
 
     IEnumerator DestroyBall()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(3);
         Destroy(this.gameObject);
     }
 
@@ -24,7 +23,9 @@ public class PokeballProjectile : MonoBehaviour
     {
         if (collision.gameObject.tag == "Pokemon")
         {
+            GameManager.Instance.AddPokemonToList(collision.gameObject.name);
             Destroy(this.gameObject);
+            Destroy(collision.gameObject);
         }
     }
 }
