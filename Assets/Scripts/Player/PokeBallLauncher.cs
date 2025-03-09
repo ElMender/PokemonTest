@@ -7,20 +7,17 @@ public class PokeBallLauncher : MonoBehaviour
 
     //Prefabs y efectos secundarios
     [SerializeField] GameObject pokeballProjectile;
-    [SerializeField] AudioSource pokeballTrowSFX;
-
-    [SerializeField] GameManager gm;
 
     //offset de donde se lanzara la pokebola
     public GameObject pokeballLaunchPos;
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !gm.isPaused)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !GameManager.Instance.isPaused)
         {
             /// Lanzar pokebola
             Instantiate(pokeballProjectile, pokeballLaunchPos.transform.position, cameraRot.transform.rotation);
-            pokeballTrowSFX.Play();
+            SoundManager.SoundInstance.PlayLaunchSFX();
         }
     }
 

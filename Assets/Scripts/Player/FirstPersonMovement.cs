@@ -4,12 +4,14 @@ using Unity.Cinemachine;
 [RequireComponent(typeof(CharacterController))]
 public class FirstPersonMovement : MonoBehaviour
 {
-    [Header("Movement Settings")]
+    [Header("Valores de control")]
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float mouseSensitivity = 100f;
 
-    [Header("Cinemachine Camera")]
+    [Header("Camara")]
     [SerializeField] private CinemachineCamera virtualCamera;
+
+    [SerializeField] AudioSource stepSFX;
 
     private CharacterController controller;
     private Transform cameraHolder;
@@ -29,6 +31,14 @@ public class FirstPersonMovement : MonoBehaviour
     {
         HandleMovement();
         HandleMouseLook();
+        if (controller.velocity.magnitude > 0)
+        {
+            stepSFX.enabled = true;
+        }
+        else
+        {
+            stepSFX.enabled = false;
+        }
     }
 
     private void HandleMovement()

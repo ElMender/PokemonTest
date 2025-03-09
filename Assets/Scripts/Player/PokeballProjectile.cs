@@ -24,6 +24,7 @@ public class PokeballProjectile : MonoBehaviour
         if (collision.gameObject.tag == "Pokemon")
         {
             GameManager.Instance.AddPokemonToList(collision.gameObject.name);
+            SoundManager.SoundInstance.PlayCaughtSFX();
             Destroy(this.gameObject);
             Destroy(collision.gameObject);
         }
