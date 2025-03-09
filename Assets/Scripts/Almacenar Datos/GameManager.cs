@@ -62,18 +62,21 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
         isPaused = true;
         Time.timeScale = 0;
         pokedexMenu.SetActive(true);
-        Cursor.lockState = CursorLockMode.None;
+
     }
 
     public void UnPauseGame()
     {
-        isPaused = false;
         Time.timeScale = 1;
         pokedexMenu.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        isPaused = false;
     }
     void LoadSavedPkmn()
     {
