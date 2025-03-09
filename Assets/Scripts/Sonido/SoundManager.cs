@@ -4,8 +4,7 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager SoundInstance { get; private set; }
 
-    [SerializeField] AudioSource launchPokeballSFX;
-    [SerializeField] AudioSource pokemonCaughtSFX;
+    [SerializeField] AudioSource launchPokeballSFX, pokemonCaughtSFX, saveGameSFX;
 
     private void Start()
     {
@@ -26,5 +25,9 @@ public class SoundManager : MonoBehaviour
     public void PlayCaughtSFX()
     {
         pokemonCaughtSFX.Play();
+    }
+    public void PlaySaveGameSFX()
+    {
+        saveGameSFX.Play();
     }
 }

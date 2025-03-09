@@ -16,16 +16,12 @@ public class GameManager : MonoBehaviour
     public GameObject[] pokemonInGame;
     public int pokemonCaught;
 
-    private void Start()
-    {
-        pokemonCaught = 0;
-    }
+    int pokemonLoadOrder = 0;
 
     private void Awake()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        pokemonInGame = GameObject.FindGameObjectsWithTag("Pokemon");
-        totalPokemonCountTxt.text = "/ " + pokemonInGame.Length;
+        Time.timeScale = 1;
+        pokemonLoadOrder = 0;
 
         if (Instance == null)
         {
@@ -35,6 +31,14 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        Cursor.lockState = CursorLockMode.Locked;
+        pokemonInGame = GameObject.FindGameObjectsWithTag("Pokemon");
+        totalPokemonCountTxt.text = "/ " + pokemonInGame.Length;
+
+        LoadSavedPkmn();
+        pokemonCaught = 0;
+        pokemonCaughtTxt.text = pokemonCaught.ToString();
     }
 
     private void Update()
@@ -70,6 +74,15 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         pokedexMenu.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
+    }
+    void LoadSavedPkmn()
+    {
+        if (PlayerPrefs.HasKey("PokemonInv" + pokemonLoadOrder))
+        {
+            AddPokemonToList(PlayerPrefs.GetString("PokemonInv" + pokemonLoadOrder));
+            pokemonLoadOrder++;
+            LoadSavedPkmn();
+        }
     }
 
 }

@@ -5,6 +5,7 @@ public class PokeballProjectile : MonoBehaviour
 {
     Rigidbody rb;
     public float force;
+    public GameObject caughtFX;
 
     private void Awake()
     {
@@ -25,6 +26,7 @@ public class PokeballProjectile : MonoBehaviour
         {
             GameManager.Instance.AddPokemonToList(collision.gameObject.name);
             SoundManager.SoundInstance.PlayCaughtSFX();
+            Instantiate(caughtFX, collision.transform.position, Quaternion.identity);
             Destroy(this.gameObject);
             Destroy(collision.gameObject);
         }
