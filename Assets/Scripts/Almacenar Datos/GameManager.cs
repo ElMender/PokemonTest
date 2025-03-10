@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     //UI Manager
     [SerializeField] GameObject pokedexMenu;
     public TextMeshProUGUI totalPokemonCountTxt, pokemonCaughtTxt;
+    public AudioSource winSFX;
 
     //Datos del juego
     public bool isPaused;
@@ -58,6 +59,10 @@ public class GameManager : MonoBehaviour
         pokemonNameList.Add(name);
         pokemonCaught++;
         pokemonCaughtTxt.text = pokemonCaught.ToString();
+        if (pokemonCaught >= 12)
+        {
+            winSFX.Play();
+        }
     }
 
     public void PauseGame()
@@ -86,6 +91,11 @@ public class GameManager : MonoBehaviour
             pokemonLoadOrder++;
             LoadSavedPkmn();
         }
+    }
+
+    public void QuitApp()
+    {
+        Application.Quit();
     }
 
 }

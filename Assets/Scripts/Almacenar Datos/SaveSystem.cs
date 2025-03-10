@@ -22,7 +22,11 @@ public class SaveSystem : MonoBehaviour
 
     public void SaveAllData()
     {
+        Time.timeScale = 1;
+        PlayerPrefs.DeleteAll();
         SavePokemonList();
+        PlayerPrefs.Save();
+        Time.timeScale = 0;
     }
 
     public void DeleteAllData()
